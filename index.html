@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="ToolNestly offers free online word, character, percentage, age, password, image resize and image compression tools.">
+<meta name="robots" content="index,follow">
+<title>ToolNestly — Free Online Tools</title>
+<style>
+:root{--ink:#172033;--muted:#667085;--brand:#4f46e5;--bg:#f6f8fb;--card:#fff;--line:#e6e9ef}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}.nav{max-width:1120px;margin:auto;padding:17px 20px;display:flex;align-items:center;justify-content:space-between}.logo{font-size:25px;font-weight:800;color:var(--ink)}.logo span{color:var(--brand)}
+.hero{max-width:950px;margin:auto;text-align:center;padding:58px 20px 35px}.hero h1{font-size:44px;margin:0 0 14px}.hero p{color:var(--muted);font-size:18px;line-height:1.6;margin:0 auto 25px}.search{width:min(680px,100%);padding:16px 18px;border:1px solid #d7dce6;border-radius:12px;font-size:16px;outline:0;background:white}.wrap{max-width:1120px;margin:auto;padding:10px 20px 50px}.section-title{font-size:26px;margin:24px 0 17px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:18px}.card,.tool{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 5px 22px rgba(20,30,50,.04)}.card h3{margin:11px 0 7px;font-size:20px}.card p{color:var(--muted);line-height:1.5;font-size:14px;min-height:43px}.icon{font-size:30px}.btn{border:0;background:var(--brand);color:white;padding:11px 16px;border-radius:9px;font-size:15px;cursor:pointer}.btn.secondary{background:#eef0ff;color:#3830b8}.tool{display:none;margin-top:22px}.tool.active{display:block}.tool h2{margin-top:0}input,textarea,select{width:100%;padding:12px;border:1px solid #d7dce6;border-radius:9px;font-size:16px;margin:7px 0 13px}label{font-weight:600;font-size:14px}.result{background:#f1f3f8;border-radius:9px;padding:13px;margin-top:12px;line-height:1.5}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.drop{border:2px dashed #cdd3df;border-radius:12px;padding:22px;text-align:center;margin:10px 0}.muted{color:var(--muted)}footer{background:var(--ink);color:#d9deea;text-align:center;padding:35px 20px}.hidden{display:none!important}
+@media(max-width:600px){.hero h1{font-size:34px}.nav span{font-size:14px}.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="logo">Tool<span>Nestly</span></div><div class="muted">Free Online Tools</div></div></header>
+<section class="hero">
+<h1>Simple tools. Free to use.</h1>
+<p>Fast, useful online tools for text, images, calculations and everyday tasks.</p>
+<input id="search" class="search" placeholder="Search tools..." oninput="filterTools()">
+</section>
+<main class="wrap">
+<h2 class="section-title">All Tools</h2>
+<div class="grid" id="cards">
+<div class="card tool-card" data-name="word counter character counter"><div class="icon">📝</div><h3>Word Counter</h3><p>Count words, characters and lines instantly.</p><button class="btn" onclick="openTool('word')">Open Tool</button></div>
+<div class="card tool-card" data-name="percentage calculator"><div class="icon">🧮</div><h3>Percentage Calculator</h3><p>Calculate percentages quickly and easily.</p><button class="btn" onclick="openTool('percent')">Open Tool</button></div>
+<div class="card tool-card" data-name="age calculator"><div class="icon">🎂</div><h3>Age Calculator</h3><p>Calculate age from your date of birth.</p><button class="btn" onclick="openTool('age')">Open Tool</button></div>
+<div class="card tool-card" data-name="password generator security"><div class="icon">🔐</div><h3>Password Generator</h3><p>Create strong random passwords in seconds.</p><button class="btn" onclick="openTool('password')">Open Tool</button></div>
+<div class="card tool-card" data-name="character counter"><div class="icon">🔤</div><h3>Character Counter</h3><p>Count characters with or without spaces.</p><button class="btn" onclick="openTool('character')">Open Tool</button></div>
+<div class="card tool-card" data-name="image resizer resize image"><div class="icon">🖼️</div><h3>Image Resizer</h3><p>Resize an image directly in your browser.</p><button class="btn" onclick="openTool('resize')">Open Tool</button></div>
+<div class="card tool-card" data-name="image compressor compress image"><div class="icon">📦</div><h3>Image Compressor</h3><p>Compress JPG, PNG or WebP images locally.</p><button class="btn" onclick="openTool('compress')">Open Tool</button></div>
+<div class="card tool-card" data-name="unit converter length"><div class="icon">📏</div><h3>Length Converter</h3><p>Convert common length units instantly.</p><button class="btn" onclick="openTool('length')">Open Tool</button></div>
+</div>
+
+<div id="word" class="tool"><h2>Word Counter</h2><textarea id="wt" rows="8" placeholder="Type or paste your text..." oninput="updateText()"></textarea><div id="wr" class="result">Words: 0 · Characters: 0 · Lines: 0</div></div>
+
+<div id="character" class="tool"><h2>Character Counter</h2><textarea id="ct" rows="8" placeholder="Type or paste your text..." oninput="updateChar()"></textarea><div id="cr" class="result">Characters: 0 · Without spaces: 0</div></div>
+
+<div id="percent" class="tool"><h2>Percentage Calculator</h2><div class="row"><div><label>Percentage</label><input id="pa" type="number" placeholder="25"></div><div><label>Number</label><input id="pb" type="number" placeholder="200"></div></div><button class="btn" onclick="percentage()">Calculate</button><div id="pr" class="result hidden"></div></div>
+
+<div id="age" class="tool"><h2>Age Calculator</h2><label>Date of birth</label><input id="dob" type="date"><button class="btn" onclick="age()">Calculate</button><div id="ar" class="result hidden"></div></div>
+
+<div id="password" class="tool"><h2>Password Generator</h2><label>Length (6–64)</label><input id="pl" type="number" min="6" max="64" value="16"><button class="btn" onclick="password()">Generate</button><div id="pwr" class="result hidden"></div></div>
+
+<div id="length" class="tool"><h2>Length Converter</h2><div class="row"><div><label>Value</label><input id="lv" type="number" placeholder="1"></div><div><label>From</label><select id="lf"><option>Meter</option><option>Kilometer</option><option>Centimeter</option><option>Foot</option><option>Inch</option><option>Mile</option></select></div></div><label>To</label><select id="lt"><option>Meter</option><option>Kilometer</option><option>Centimeter</option><option>Foot</option><option>Inch</option><option>Mile</option></select><br><button class="btn" onclick="lengthConvert()">Convert</button><div id="lr" class="result hidden"></div></div>
+
+<div id="resize" class="tool"><h2>Image Resizer</h2><p class="muted">Choose an image, enter a new width and download the resized image.</p><input id="ri" type="file" accept="image/*"><div class="row"><div><label>Width (px)</label><input id="rw" type="number" placeholder="800"></div><div><label>Height (px, optional)</label><input id="rh" type="number" placeholder="Auto"></div></div><button class="btn" onclick="resizeImage()">Resize & Download</button><div id="rr" class="result hidden"></div></div>
+
+<div id="compress" class="tool"><h2>Image Compressor</h2><p class="muted">Compression happens in your browser; your image is not uploaded.</p><input id="ci" type="file" accept="image/*"><label>Quality</label><input id="cq" type="range" min="20" max="95" value="70"><button class="btn" onclick="compressImage()">Compress & Download</button><div id="cor" class="result hidden"></div></div>
+</main>
+<footer>
+      <div>© 2026 ToolNestly · Free online utility tools</div>
+      <div style="margin-top:12px">
+        <a href="about.html" style="color:#d9deea;margin:0 8px">About</a>
+        <a href="contact.html" style="color:#d9deea;margin:0 8px">Contact</a>
+        <a href="privacy.html" style="color:#d9deea;margin:0 8px">Privacy</a>
+        <a href="terms.html" style="color:#d9deea;margin:0 8px">Terms</a>
+      </div>
+    </footer>
+<script>
+function openTool(id){document.querySelectorAll('.tool').forEach(x=>x.classList.remove('active'));let e=document.getElementById(id);e.classList.add('active');e.scrollIntoView({behavior:'smooth',block:'start'})}
+function filterTools(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('.tool-card').forEach(c=>c.style.display=c.dataset.name.includes(q)?'block':'none')}
+function updateText(){let t=document.getElementById('wt').value;document.getElementById('wr').textContent=`Words: ${t.trim()?t.trim().split(/\\s+/).length:0} · Characters: ${t.length} · Lines: ${t?t.split(/\\n/).length:0}`}
+function updateChar(){let t=document.getElementById('ct').value;document.getElementById('cr').textContent=`Characters: ${t.length} · Without spaces: ${t.replace(/\\s/g,'').length}`}
+function percentage(){let a=+pa.value,b=+pb.value,r=document.getElementById('pr');r.textContent=isFinite(a)&&isFinite(b)?`Result: ${(a*b/100).toLocaleString()}`:'Enter both numbers.';r.classList.remove('hidden')}
+function age(){let d=new Date(dob.value),r=document.getElementById('ar');if(isNaN(d)){r.textContent='Choose your date of birth.'}else{let n=new Date(),y=n.getFullYear()-d.getFullYear(),m=n.getMonth()-d.getMonth(),day=n.getDate()-d.getDate();if(day<0)m--;if(m<0)y--;r.textContent=`Your age is ${y} years.`}r.classList.remove('hidden')}
+function password(){let n=Math.min(64,Math.max(6,+pl.value||16)),s='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*',o='';for(let i=0;i<n;i++)o+=s[Math.floor(Math.random()*s.length)];pwr.textContent=o;pwr.classList.remove('hidden')}
+const units={Meter:1,Kilometer:1000,Centimeter:.01,Foot:.3048,Inch:.0254,Mile:1609.344};
+function lengthConvert(){let v=+lv.value,r=document.getElementById('lr');if(!isFinite(v)){r.textContent='Enter a value.'}else r.textContent=`Result: ${(v*units[lf.value]/units[lt.value]).toLocaleString()} ${lt.value}`;r.classList.remove('hidden')}
+function loadImage(input,cb){let f=input.files[0];if(!f){alert('Choose an image first.');return}let im=new Image();im.onload=()=>cb(im,f);im.src=URL.createObjectURL(f)}
+function downloadCanvas(c,name,type){let a=document.createElement('a');a.download=name;a.href=c.toDataURL(type||'image/jpeg',.9);a.click()}
+function resizeImage(){loadImage(ri,(im,f)=>{let w=+rw.value||im.width,h=+rh.value||Math.round(im.height*w/im.width),c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);downloadCanvas(c,'resized-image.png','image/png');rr.textContent=`Done: ${w} × ${h}px`;rr.classList.remove('hidden')})}
+function compressImage(){loadImage(ci,(im,f)=>{let c=document.createElement('canvas');c.width=im.width;c.height=im.height;c.getContext('2d').drawImage(im,0,0);let q=(+cq.value)/100,a=document.createElement('a');a.download='compressed-image.jpg';a.href=c.toDataURL('image/jpeg',q);a.click();cor.textContent='Compressed JPEG downloaded. Actual size depends on the original image.';cor.classList.remove('hidden')})}
+</script>
+</body></html>
